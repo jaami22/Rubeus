@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PCOD Symptom Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <style>
         :root {
             --primary: #ff69b4;
@@ -90,8 +91,45 @@
             margin-top: 20px;
             padding: 20px;
             border-radius: 8px;
-            background-color: var(--secondary);
+            background-color: white;
             display: none;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            position: relative;
+            height: 300px;
+        }
+
+        .analysis-text {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--secondary);
+            border-radius: 8px;
+        }
+
+        .severity-indicator {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .severity-low {
+            background-color: #90EE90;
+            color: #006400;
+        }
+
+        .severity-moderate {
+            background-color: #FFD700;
+            color: #8B4513;
+        }
+
+        .severity-high {
+            background-color: #FFB6C1;
+            color: #8B0000;
         }
     </style>
 </head>
@@ -182,10 +220,18 @@
 
     <div id="resultSection" class="result-section">
         <h3>Symptom Analysis</h3>
-        <p id="resultText"></p>
+        <div class="severity-indicator" id="severityIndicator"></div>
+        <div class="chart-container">
+            <canvas id="symptomsChart"></canvas>
+        </div>
+        <div class="analysis-text">
+            <p id="resultText"></p>
+        </div>
     </div>
 
     <script>
+        let symptomsChart = null;
+
         document.getElementById('symptomForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -195,40 +241,138 @@
             const stressLevel = formData.get('stressLevel');
             const pelvicPain = formData.get('pelvicPain');
             
+            // Calculate scores
+            const scores = calculateScores(periodRegularity, symptoms, stressLevel, pelvicPain);
+            const totalScore = scores.reduce((a, b) => a + b.score, 0);
+            const maxPossibleScore = 100;
+            const severityPercentage = (totalScore / maxPossibleScore) * 100;
+            
+            // Determine risk level
             let riskLevel = 'low';
-            let recommendations = [];
-
-            // Basic risk assessment logic
-            if (periodRegularity === 'irregular' || periodRegularity === 'absent') {
-                riskLevel = 'moderate';
-                recommendations.push('Consider consulting a gynecologist about your irregular periods');
-            }
-
-            if (symptoms.length >= 3) {
+            if (severityPercentage > 70) {
                 riskLevel = 'high';
-                recommendations.push('Multiple PCOD symptoms detected - medical evaluation is recommended');
+            } else if (severityPercentage > 40) {
+                riskLevel = 'moderate';
             }
 
-            if (stressLevel === 'high' || stressLevel === 'severe') {
-                recommendations.push('Consider stress management techniques or counseling');
-            }
+            // Generate recommendations
+            const recommendations = generateRecommendations(riskLevel, scores);
 
-            if (pelvicPain === 'moderate' || pelvicPain === 'severe') {
-                recommendations.push('Discuss pain management options with your healthcare provider');
-            }
+            // Update severity indicator
+            const severityIndicator = document.getElementById('severityIndicator');
+            severityIndicator.textContent = `Overall Severity: ${riskLevel.toUpperCase()}`;
+            severityIndicator.className = `severity-indicator severity-${riskLevel}`;
+
+            // Update chart
+            updateChart(scores);
 
             // Display results
             const resultSection = document.getElementById('resultSection');
             const resultText = document.getElementById('resultText');
             
             resultText.innerHTML = `
-                <strong>Risk Level:</strong> ${riskLevel.toUpperCase()}<br><br>
                 <strong>Recommendations:</strong><br>
                 ${recommendations.map(rec => `• ${rec}`).join('<br>')}
             `;
             
             resultSection.style.display = 'block';
         });
+
+        function calculateScores(periodRegularity, symptoms, stressLevel, pelvicPain) {
+            let scores = [
+                {
+                    category: 'Menstrual Health',
+                    score: periodRegularity === 'regular' ? 10 : 
+                           periodRegularity === 'irregular' ? 20 : 30
+                },
+                {
+                    category: 'Physical Symptoms',
+                    score: symptoms.length * 5
+                },
+                {
+                    category: 'Stress Level',
+                    score: stressLevel === 'low' ? 5 :
+                           stressLevel === 'moderate' ? 10 :
+                           stressLevel === 'high' ? 15 : 20
+                },
+                {
+                    category: 'Pain Level',
+                    score: pelvicPain === 'none' ? 5 :
+                           pelvicPain === 'mild' ? 10 :
+                           pelvicPain === 'moderate' ? 15 : 20
+                }
+            ];
+            return scores;
+        }
+
+        function generateRecommendations(riskLevel, scores) {
+            let recommendations = [];
+            
+            if (scores[0].score > 20) {
+                recommendations.push('Consider consulting a gynecologist about your irregular periods');
+            }
+            
+            if (scores[1].score > 15) {
+                recommendations.push('Multiple PCOD symptoms detected - medical evaluation is recommended');
+            }
+            
+            if (scores[2].score > 15) {
+                recommendations.push('Consider stress management techniques or counseling');
+            }
+            
+            if (scores[3].score > 15) {
+                recommendations.push('Discuss pain management options with your healthcare provider');
+            }
+
+            if (riskLevel === 'high') {
+                recommendations.push('Immediate medical consultation is recommended');
+            }
+
+            return recommendations;
+        }
+
+        function updateChart(scores) {
+            const ctx = document.getElementById('symptomsChart').getContext('2d');
+            
+            if (symptomsChart) {
+                symptomsChart.destroy();
+            }
+
+            symptomsChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: scores.map(item => item.category),
+                    datasets: [{
+                        data: scores.map(item => item.score),
+                        backgroundColor: [
+                            '#FF69B4',
+                            '#FFB6C1',
+                            '#FFC0CB',
+                            '#DB7093'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    return `${label}: ${value} points`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
