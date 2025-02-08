@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOD Symptom Tracker</title>
+    <style>
+        :root {
+            --primary: #ff69b4;
+            --secondary: #f8f0f4;
+            --text: #333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F08080;
+            color: var(--text);
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--secondary);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .symptom-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .question-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--secondary);
+        }
+
+        .question-group h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff4da6;
+        }
+
+        .result-section {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: var(--secondary);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PCOD Symptom Tracker</h1>
+        <p>Track your symptoms and get personalized insights</p>
+    </div>
+
+    <form id="symptomForm" class="symptom-form">
+        <div class="question-group">
+            <h3>Menstrual History</h3>
+            <label>
+                How regular are your periods?
+                <select name="periodRegularity" required>
+                    <option value="">Select an option</option>
+                    <option value="regular">Regular (Every 28-35 days)</option>
+                    <option value="irregular">Irregular</option>
+                    <option value="absent">Absent for 3+ months</option>
+                </select>
+            </label>
+
+            <label>
+                Average cycle length (in days):
+                <input type="number" name="cycleLength" min="1" max="100" required>
+            </label>
+        </div>
+
+        <div class="question-group">
+            <h3>Physical Symptoms</h3>
+            <label>
+                <input type="checkbox" name="symptoms" value="weight-gain">
+                Unexplained weight gain
+            </label>
+            <label>
+                <input type="checkbox" name="symptoms" value="hair-growth">
+                Excessive hair growth
+            </label>
+            <label>
+                <input type="checkbox" name="symptoms" value="acne">
+                Acne
+            </label>
+            <label>
+                <input type="checkbox" name="symptoms" value="hair-loss">
+                Hair loss
+            </label>
+            <label>
+                <input type="checkbox" name="symptoms" value="fatigue">
+                Fatigue
+            </label>
+        </div>
+
+        <div class="question-group">
+            <h3>Lifestyle Assessment</h3>
+            <label>
+                How would you rate your stress level?
+                <select name="stressLevel" required>
+                    <option value="">Select an option</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                    <option value="severe">Severe</option>
+                </select>
+            </label>
+
+            <label>
+                How many hours do you sleep on average?
+                <input type="number" name="sleepHours" min="1" max="24" required>
+            </label>
+        </div>
+
+        <div class="question-group">
+            <h3>Pain Assessment</h3>
+            <label>
+                Do you experience pelvic pain?
+                <select name="pelvicPain" required>
+                    <option value="">Select an option</option>
+                    <option value="none">No pain</option>
+                    <option value="mild">Mild</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="severe">Severe</option>
+                </select>
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn">Track Symptoms</button>
+    </form>
+
+    <div id="resultSection" class="result-section">
+        <h3>Symptom Analysis</h3>
+        <p id="resultText"></p>
+    </div>
+
+    <script>
+        document.getElementById('symptomForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const symptoms = formData.getAll('symptoms');
+            const periodRegularity = formData.get('periodRegularity');
+            const stressLevel = formData.get('stressLevel');
+            const pelvicPain = formData.get('pelvicPain');
+            
+            let riskLevel = 'low';
+            let recommendations = [];
+
+            // Basic risk assessment logic
+            if (periodRegularity === 'irregular' || periodRegularity === 'absent') {
+                riskLevel = 'moderate';
+                recommendations.push('Consider consulting a gynecologist about your irregular periods');
+            }
+
+            if (symptoms.length >= 3) {
+                riskLevel = 'high';
+                recommendations.push('Multiple PCOD symptoms detected - medical evaluation is recommended');
+            }
+
+            if (stressLevel === 'high' || stressLevel === 'severe') {
+                recommendations.push('Consider stress management techniques or counseling');
+            }
+
+            if (pelvicPain === 'moderate' || pelvicPain === 'severe') {
+                recommendations.push('Discuss pain management options with your healthcare provider');
+            }
+
+            // Display results
+            const resultSection = document.getElementById('resultSection');
+            const resultText = document.getElementById('resultText');
+            
+            resultText.innerHTML = `
+                <strong>Risk Level:</strong> ${riskLevel.toUpperCase()}<br><br>
+                <strong>Recommendations:</strong><br>
+                ${recommendations.map(rec => `• ${rec}`).join('<br>')}
+            `;
+            
+            resultSection.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
