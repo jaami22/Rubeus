@@ -18,7 +18,7 @@ mysql = MySQL(app)
 def index():
     if 'user_id' in session:
         return redirect(url_for('dashboard'))
-    return redirect(url_for('login'))
+    return redirect(url_for('signup'))  # Changed from 'login' to 'signup'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

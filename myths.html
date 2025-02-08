@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Education Resource</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .topic-button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        #menstruation-btn {
+            background-color: #ff7eb3;
+            color: white;
+        }
+
+        #sex-ed-btn {
+            background-color: #ff7eb3;
+            color: white;
+        }
+
+        .topic-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .content-section {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .menstruation-content {
+            background-color: #fff0f5;
+        }
+
+        .sex-ed-content {
+            background-color:#f9abcc45;
+        }
+
+        .myth-fact-container {
+            margin-top: 20px;
+        }
+
+        .myth-fact-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .myth {
+            border-left: 4px solid #ff4444;
+        }
+
+        .fact {
+            border-left: 4px solid #00C851;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .topic-header h2 {
+            margin: 0;
+        }
+
+        .resources {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ff7eb3;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Health Education Resource</h1>
+        
+        <div class="button-container">
+            <button id="menstruation-btn" class="topic-button" onclick="showContent('menstruation')">MENSTRUATION</button>
+            <button id="sex-ed-btn" class="topic-button" onclick="showContent('sex-ed')">SEX EDUCATION</button>
+        </div>
+
+        <div id="menstruation-content" class="content-section menstruation-content">
+            <div class="topic-header">
+                <h2>Understanding Menstruation</h2>
+            </div>
+            
+            <p>Menstruation is a natural biological process that typically occurs monthly as part of the reproductive cycle. Understanding this process is crucial for overall health awareness.</p>
+            
+            <h3>Key Information:</h3>
+            <ul>
+                <li>Average cycle length: 28 days (can range from 21-35 days)</li>
+                <li>Typical period duration: 3-7 days</li>
+                <li>Age of first period (menarche): Usually between 10-15 years</li>
+                <li>Common symptoms: Cramps, mood changes, fatigue, bloating</li>
+            </ul>
+
+            <div class="myth-fact-container">
+                <h3>Myths vs Facts</h3>
+                
+                <div class="myth-fact-item myth">
+                    <h4>MYTH: Exercise should be avoided during menstruation</h4>
+                    <p>Exercise can actually help alleviate menstrual cramps and improve mood through endorphin release.</p>
+                </div>
+
+                <div class="myth-fact-item fact">
+                    <h4>FACT: Menstrual cycles can be irregular</h4>
+                    <p>Variation in cycle length is normal, especially during adolescence and approaching menopause.</p>
+                </div>
+
+                <div class="myth-fact-item myth">
+                    <h4>MYTH: You shouldn't bathe during your period</h4>
+                    <p>Regular bathing is essential for hygiene and can help with cramp relief.</p>
+                </div>
+
+                <div class="myth-fact-item fact">
+                    <h4>FACT: PMS is a real condition</h4>
+                    <p>Premenstrual Syndrome involves physical and emotional symptoms caused by hormonal changes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="sex-ed-content" class="content-section sex-ed-content">
+            <div class="topic-header">
+                <h2>Comprehensive Sex Education</h2>
+            </div>
+
+            <p>Sex education encompasses physical, emotional, social, and mental aspects of human sexuality and relationships.</p>
+
+            <h3>Key Topics:</h3>
+            <ul>
+                <li>Reproductive health and anatomy</li>
+                <li>Consent and healthy relationships</li>
+                <li>STI prevention and safe practices</li>
+                <li>Gender identity and sexual orientation</li>
+                <li>Emotional and psychological aspects</li>
+            </ul>
+
+            <div class="myth-fact-container">
+                <h3>Myths vs Facts</h3>
+                
+                <div class="myth-fact-item myth">
+                    <h4>MYTH: Sex education promotes early sexual activity</h4>
+                    <p>Research shows that comprehensive sex education actually helps young people make more informed and safer decisions.</p>
+                </div>
+
+         za       <div class="myth-fact-item fact">
+                    <h4>FACT: Communication is key in relationships</h4>
+                    <p>Open dialogue about boundaries, consent, and expectations leads to healthier relationships.</p>
+                </div>
+
+                <div class="myth-fact-item myth">
+                    <h4>MYTH: STIs always show symptoms</h4>
+                    <p>Many STIs can be asymptomatic, which is why regular testing is important for sexually active individuals.</p>
+                </div>
+
+                <div class="myth-fact-item fact">
+                    <h4>FACT: Consent can be withdrawn at any time</h4>
+                    <p>Consent must be enthusiastic, ongoing, and can be revoked at any point during any activity.</p>
+                </div>
+            </div>
+
+            <div class="resources">
+                <h3>Additional Resources</h3>
+                <ul>
+                    <li>Contact healthcare providers for personalized advice</li>
+                    <li>School counselors and health educators</li>
+                    <li>Trusted online medical resources</li>
+                    <li>Local health clinics and community centers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(topic) {
+            // Hide all content sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Show selected content
+            document.getElementById(`${topic}-content`).style.display = 'block';
+
+            // Scroll to content smoothly
+            document.getElementById(`${topic}-content`).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

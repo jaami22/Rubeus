@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0032)http://127.0.0.1:5500/asses.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mental Health Assessment</title>
     <style>
@@ -25,7 +25,7 @@
         .header {
             text-align: center;
             padding: 25px;
-            background-color: rgb(247, 214, 229);
+            background-color: var(--secondary);
             border-radius: 15px;
             margin-bottom: 30px;
         }
@@ -54,14 +54,14 @@
         .question-section {
             margin-bottom: 30px;
             padding: 20px;
-            background-color: rgb(252, 217, 231);
+            background-color: var(--secondary);
             border-radius: 10px;
         }
 
         .question-section h3 {
             color: var(--primary);
             margin-bottom: 15px;
-            border-bottom: rgb(253, 53, 107);
+            border-bottom: 2px solid var(--accent);
             padding-bottom: 8px;
         }
 
@@ -143,7 +143,7 @@
                 <p>1. Over the past two weeks, how often have you felt down, depressed, or hopeless?</p>
                 <div class="rating-scale">
                     <div class="rating-option">
-                        <input type="radio" name="depression" value="0" required>
+                        <input type="radio" name="depression" value="0" required="">
                         <label>Not at all</label>
                     </div>
                     <div class="rating-option">
@@ -165,7 +165,7 @@
                 <p>2. How often have you felt overwhelmed by worry or anxiety?</p>
                 <div class="rating-scale">
                     <div class="rating-option">
-                        <input type="radio" name="anxiety" value="0" required>
+                        <input type="radio" name="anxiety" value="0" required="">
                         <label>Not at all</label>
                     </div>
                     <div class="rating-option">
@@ -185,13 +185,13 @@
         </div>
 
         <div class="question-section">
-            <h3>Body Image & Self-Esteem</h3>
+            <h3>Body Image &amp; Self-Esteem</h3>
             
             <div class="question">
                 <p>3. How often do you feel negatively about your body or appearance?</p>
                 <div class="rating-scale">
                     <div class="rating-option">
-                        <input type="radio" name="bodyImage" value="0" required>
+                        <input type="radio" name="bodyImage" value="0" required="">
                         <label>Never</label>
                     </div>
                     <div class="rating-option">
@@ -211,13 +211,13 @@
         </div>
 
         <div class="question-section">
-            <h3>Social Support & Relationships</h3>
+            <h3>Social Support &amp; Relationships</h3>
             
             <div class="question">
                 <p>4. How supported do you feel by friends and family?</p>
                 <div class="rating-scale">
                     <div class="rating-option">
-                        <input type="radio" name="support" value="3" required>
+                        <input type="radio" name="support" value="3" required="">
                         <label>Very supported</label>
                     </div>
                     <div class="rating-option">
@@ -311,5 +311,43 @@
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         });
     </script>
-</body>
-</html>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>

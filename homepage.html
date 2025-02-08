@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOD Wellness Hub - Your Health Companion</title>
+    <style>
+        :root {
+            --primary: #FA8072;
+            --primary-dark: white;
+            --secondary: #ea8aaa;
+            --background: #fcafbfe4;
+            --text: #333;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--background);
+        }
+
+        .navbar {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, peach 0%, #e48eb3 100%);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .symptom-tracker-preview {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .tracker-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .signup-section {
+            background: white;
+            padding: 4rem 2rem;
+        }
+
+        .signup-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .signup-form input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #bf6c6c;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .features {
+            padding: 4rem 2rem;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .signup-form {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">PCOD Wellness Hub</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Take Control of Your PCOD Journey</h1>
+                <p>Track symptoms, access expert resources, and join a supportive community - all in one place.</p>
+            </div>
+            <div class="symptom-tracker-preview">
+                <h3>Quick Symptom Track</h3>
+                <form class="tracker-form" id="symptomForm">
+                    <div class="form-group">
+                        <label>How are you feeling today?</label>
+                        <select id="mood">
+                            <option value="">Select mood</option>
+                            <option value="great">Great</option>
+                            <option value="good">Good</option>
+                            <option value="okay">Okay</option>
+                            <option value="not_great">Not Great</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Energy Level (1-10)</label>
+                        <input type="number" min="1" max="10" id="energy">
+                    </div>
+                    <div class="form-group">
+                        <label>Any Symptoms Today?</label>
+                        <select id="symptoms" multiple>
+                            <option value="cramps">Cramps</option>
+                            <option value="fatigue">Fatigue</option>
+                            <option value="mood_swings">Mood Swings</option>
+                            <option value="headache">Headache</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Log Symptoms</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="signup-section">
+        <div class="signup-content">
+            <h2>Join Our Community</h2>
+            <p>Get expert tips, resources, and support delivered to your inbox.</p>
+            <form class="signup-form" id="signupForm">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+            <div class="success-message" id="successMessage">
+                Thank you for subscribing! Check your email for confirmation.
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Symptom Tracking</h3>
+                <p>Record and monitor your PCOD symptoms, identify patterns, and track your progress over time.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Mental Wellness</h3>
+                <p>Access mental health resources, self-assessment tools, and guided meditation exercises.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Expert Resources</h3>
+                <p>Learn from verified health professionals and access evidence-based information about PCOD.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Form submission handlers
+        document.getElementById('symptomForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Symptoms logged successfully! View your dashboard for insights.');
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
