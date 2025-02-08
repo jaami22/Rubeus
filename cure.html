@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCOD Wellness Hub - Personalized Plans</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #fc6286, #ff8fab);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intensity-selector {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .intensity-selector select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid #fc6286;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan-card h2 {
+            color: #fc6286;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .plan-card h3 {
+            color: #666;
+            margin: 1rem 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .plan-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .plan-item:before {
+            content: "•";
+            color: #fc6286;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: #fff3f6;
+            border-left: 4px solid #fc6286;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .recommendations {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>PCOD Wellness Hub</h1>
+        <p>Personalized Diet & Exercise Recommendations</p>
+    </div>
+
+    <div class="container">
+        <div class="intensity-selector">
+            <h2>Select Your PCOD Intensity Level</h2>
+            <select id="intensityLevel">
+                <option value="mild">Mild PCOD</option>
+                <option value="moderate">Moderate PCOD</option>
+                <option value="severe">Severe PCOD</option>
+            </select>
+        </div>
+
+        <div class="recommendations">
+            <div class="plan-card">
+                <h2><i class="fas fa-utensils"></i> Diet Plan</h2>
+                
+                <div id="mildDiet">
+                    <h3>Recommended Diet for Mild PCOD</h3>
+                    <div class="plan-item">Start your day with warm lemon water</div>
+                    <div class="plan-item">Include high-fiber foods (oats, quinoa, brown rice)</div>
+                    <div class="plan-item">Eat plenty of green leafy vegetables</div>
+                    <div class="plan-item">Include lean proteins (fish, chicken, tofu)</div>
+                    <div class="plan-item">Limit processed sugars and refined carbs</div>
+                    <div class="info-box">
+                        Maintain regular meal timings and stay hydrated throughout the day
+                    </div>
+                </div>
+
+                <div id="moderateDiet" class="hidden">
+                    <h3>Recommended Diet for Moderate PCOD</h3>
+                    <div class="plan-item">Follow a low-glycemic diet</div>
+                    <div class="plan-item">Include anti-inflammatory foods</div>
+                    <div class="plan-item">Increase protein intake (eggs, legumes, lean meats)</div>
+                    <div class="plan-item">Add omega-3 rich foods (fatty fish, nuts)</div>
+                    <div class="plan-item">Avoid dairy and gluten if sensitive</div>
+                    <div class="info-box">
+                        Consider intermittent fasting after consulting your healthcare provider
+                    </div>
+                </div>
+
+                <div id="severeDiet" class="hidden">
+                    <h3>Recommended Diet for Severe PCOD</h3>
+                    <div class="plan-item">Strict low-carb, anti-inflammatory diet</div>
+                    <div class="plan-item">Focus on whole, unprocessed foods</div>
+                    <div class="plan-item">Include specific supplements (as prescribed)</div>
+                    <div class="plan-item">Eliminate inflammatory foods</div>
+                    <div class="plan-item">Regular meal timing with portion control</div>
+                    <div class="info-box">
+                        Work with a nutritionist for a personalized meal plan
+                    </div>
+                </div>
+            </div>
+
+            <div class="plan-card">
+                <h2><i class="fas fa-dumbbell"></i> Exercise Plan</h2>
+                
+                <div id="mildExercise">
+                    <h3>Recommended Exercise for Mild PCOD</h3>
+                    <div class="plan-item">30 minutes of moderate cardio (5 days/week)</div>
+                    <div class="plan-item">Light strength training (2-3 days/week)</div>
+                    <div class="plan-item">Yoga or stretching exercises</div>
+                    <div class="plan-item">Daily walking for 30 minutes</div>
+                    <div class="plan-item">Light swimming or cycling</div>
+                    <div class="info-box">
+                        Focus on consistency rather than intensity
+                    </div>
+                </div>
+
+                <div id="moderateExercise" class="hidden">
+                    <h3>Recommended Exercise for Moderate PCOD</h3>
+                    <div class="plan-item">45 minutes of cardio (5 days/week)</div>
+                    <div class="plan-item">Moderate strength training (3-4 days/week)</div>
+                    <div class="plan-item">HIIT workouts (2 days/week)</div>
+                    <div class="plan-item">Stress-reducing activities like yoga</div>
+                    <div class="plan-item">Core strengthening exercises</div>
+                    <div class="info-box">
+                        Balance between cardio and strength training is crucial
+                    </div>
+                </div>
+
+                <div id="severeExercise" class="hidden">
+                    <h3>Recommended Exercise for Severe PCOD</h3>
+                    <div class="plan-item">Structured exercise program with professional guidance</div>
+                    <div class="plan-item">Low-impact cardio exercises</div>
+                    <div class="plan-item">Gentle strength training with proper form</div>
+                    <div class="plan-item">Therapeutic yoga or pilates</div>
+                    <div class="plan-item">Regular stretching and mobility work</div>
+                    <div class="info-box">
+                        Start slowly and gradually increase intensity under supervision
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('intensityLevel').addEventListener('change', function() {
+            const intensity = this.value;
+            const levels = ['mild', 'moderate', 'severe'];
+            
+            levels.forEach(level => {
+                document.getElementById(`${level}Diet`).classList.add('hidden');
+                document.getElementById(`${level}Exercise`).classList.add('hidden');
+            });
+            
+            document.getElementById(`${intensity}Diet`).classList.remove('hidden');
+            document.getElementById(`${intensity}Exercise`).classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
