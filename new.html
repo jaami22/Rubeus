@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ... (keep existing head content) ... -->
+    <style>
+        :root {
+            --primary: #FA8072;
+            --primary-dark: white;
+            --secondary: #ea8aaa;
+            --background: #fcafbfe4;
+            --text: #333;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .calendar-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-day:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .weekday-header {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary);
+            padding: 10px 0;
+        }
+
+        .calendar-day.today {
+            background: var(--primary);
+            color: white;
+        }
+
+        .symptom-tracker {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: var(--secondary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .has-entry {
+            background: var(--secondary) !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Rubeus</h1>
+        <p>Track your health journey with our specialized calendar</p>
+    </header>
+
+    <div class="container">
+        <section class="calendar-section">
+            <div class="calendar-header">
+                <button class="button">Previous Month</button>
+                <h2>February 2025</h2>
+                <button class="button">Next Month</button>
+            </div>
+
+            <div class="calendar-grid">
+                <div class="weekday-header">Sun</div>
+                <div class="weekday-header">Mon</div>
+                <div class="weekday-header">Tue</div>
+                <div class="weekday-header">Wed</div>
+                <div class="weekday-header">Thu</div>
+                <div class="weekday-header">Fri</div>
+                <div class="weekday-header">Sat</div>
+
+                <!-- Calendar days -->
+                <div class="calendar-day">26</div>
+                <div class="calendar-day">27</div>
+                <div class="calendar-day">28</div>
+                <div class="calendar-day">29</div>
+                <div class="calendar-day">30</div>
+                <div class="calendar-day">31</div>
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day">3</div>
+                <div class="calendar-day">4</div>
+                <div class="calendar-day">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+                <div class="calendar-day today">8</div>
+                <div class="calendar-day">9</div>
+                <div class="calendar-day">10</div>
+                <div class="calendar-day">11</div>
+                <div class="calendar-day">12</div>
+                <div class="calendar-day">13</div>
+                <div class="calendar-day">14</div>
+                <div class="calendar-day">15</div>
+                <div class="calendar-day">16</div>
+                <div class="calendar-day">17</div>
+                <div class="calendar-day">18</div>
+                <div class="calendar-day">19</div>
+                <div class="calendar-day">20</div>
+                <div class="calendar-day">21</div>
+                <div class="calendar-day">22</div>
+                <div class="calendar-day">23</div>
+                <div class="calendar-day">24</div>
+                <div class="calendar-day">25</div>
+                <div class="calendar-day">26</div>
+                <div class="calendar-day">27</div>
+                <div class="calendar-day">28</div>
+                <div class="calendar-day">29</div>
+            </div>
+
+            <div class="symptom-tracker">
+                <h3>Daily Symptom Tracker</h3>
+                <p>Click on a date to record your symptoms and track your PCOD journey</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="symptomModal">
+        <div class="modal-content">
+            <h3>Track Symptoms for <span id="selectedDate"></span></h3>
+            <form id="symptomForm">
+                <div class="form-group">
+                    <label>Mood:</label>
+                    <select name="mood">
+                        <option value="">Select Mood</option>
+                        <option value="happy">😊 Happy</option>
+                        <option value="neutral">😐 Neutral</option>
+                        <option value="sad">😔 Sad</option>
+                        <option value="anxious">😰 Anxious</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pain Level (1-10):</label>
+                    <input type="number" name="painLevel" min="1" max="10">
+                </div>
+                <div class="form-group">
+                    <label>Symptoms:</label>
+                    <label><input type="checkbox" name="symptoms" value="cramps"> Menstrual Cramps</label>
+                    <label><input type="checkbox" name="symptoms" value="bloating"> Bloating</label>
+                    <label><input type="checkbox" name="symptoms" value="headache"> Headache</label>
+                    <label><input type="checkbox" name="symptoms" value="acne"> Acne</label>
+                </div>
+                <div class="form-group">
+                    <label>Notes:</label>
+                    <textarea name="notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="button">Save Entry</button>
+                <button type="button" class="button" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        function generateCalendar() {
+            const calendarGrid = document.querySelector('.calendar-grid');
+            const monthYear = document.querySelector('.calendar-header h2');
+
+            // Clear existing calendar days
+            calendarGrid.innerHTML = '';
+
+            // Add weekday headers
+            ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(day => {
+                calendarGrid.innerHTML += `<div class="weekday-header">${day}</div>`;
+            });
+
+            // Set month/year header
+            monthYear.textContent = new Intl.DateTimeFormat('en-US', {
+                month: 'long', year: 'numeric'
+            }).format(currentDate);
+
+            // Calculate calendar dates
+            const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+            const startDay = monthStart.getDay();
+            const endDate = monthEnd.getDate();
+
+            // Previous month's days
+            const prevMonthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+            for (let i = startDay - 1; i >= 0; i--) {
+                calendarGrid.innerHTML += `<div class="calendar-day other-month">${prevMonthEnd - i}</div>`;
+            }
+
+            // Current month's days
+            const today = new Date();
+            for (let i = 1; i <= endDate; i++) {
+                const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+                const isToday = date.toDateString() === today.toDateString();
+                const hasEntry = localStorage.getItem(getStorageKey(date));
+                calendarGrid.innerHTML += `
+                    <div class="calendar-day ${isToday ? 'today' : ''} ${hasEntry ? 'has-entry' : ''}" 
+                         data-date="${date.toISOString()}">${i}</div>`;
+            }
+
+            // Next month's days
+            const totalCells = 42; // 6 rows * 7 days
+            const remainingCells = totalCells - (startDay + endDate);
+            for (let i = 1; i <= remainingCells; i++) {
+                calendarGrid.innerHTML += `<div class="calendar-day other-month">${i}</div>`;
+            }
+
+            // Add click listeners to all days
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.addEventListener('click', () => openDay(day));
+            });
+        }
+
+        function openDay(dayElement) {
+            const dateString = dayElement.dataset.date;
+            if (!dateString) return; // Skip other-month days
+
+            selectedDate = new Date(dateString);
+            document.getElementById('selectedDate').textContent =
+                selectedDate.toLocaleDateString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
+
+            // Load existing data
+            const savedData = localStorage.getItem(getStorageKey(selectedDate));
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.querySelector('[name="mood"]').value = data.mood || '';
+                document.querySelector('[name="painLevel"]').value = data.painLevel || '';
+                document.querySelectorAll('[name="symptoms"]').forEach(checkbox => {
+                    checkbox.checked = data.symptoms?.includes(checkbox.value) || false;
+                });
+                document.querySelector('[name="notes"]').value = data.notes || '';
+            } else {
+                document.getElementById('symptomForm').reset();
+            }
+
+            document.getElementById('symptomModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('symptomModal').style.display = 'none';
+        }
+
+        function getStorageKey(date) {
+            return `entry-${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+        }
+
+        document.getElementById('symptomForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const entry = {
+                mood: formData.get('mood'),
+                painLevel: formData.get('painLevel'),
+                symptoms: formData.getAll('symptoms'),
+                notes: formData.get('notes')
+            };
+
+            localStorage.setItem(
+                getStorageKey(selectedDate),
+                JSON.stringify(entry)
+            );
+
+            closeModal();
+            generateCalendar(); // Refresh calendar to show new entry
+        });
+
+        // Navigation controls
+        document.querySelector('.calendar-header').addEventListener('click', e => {
+            if (e.target.tagName === 'BUTTON') {
+                currentDate.setMonth(currentDate.getMonth() + (e.target.textContent.includes('Previous') ? -1 : 1));
+                generateCalendar();
+            }
+        });
+
+        // Initial generation
+        generateCalendar();
+    </script>
+</body>
+
+</html>
